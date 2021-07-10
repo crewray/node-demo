@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" placeholder="请输入名称" id="name">
+    <input type="text" placeholder="请输入职业" id="class">
+    <button id="submit" onclick="addHero.add()">确定</button>
+
+    <script src="./jquery.js"></script>
+    <script>
+        var addHero = {
+            add: function () {
+                var name=$('#name').val()
+                var job=$('#class').val()
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8888/add",
+                    data: {
+                        name:name,
+                        class:job
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.code==666){
+                            alert('添加成功')
+                            location.href='./index.html'
+                        }else{
+                            alert('添加失败')
+                        }
+                    },
+                    error: function(err){
+                        console.log(err)
+                    }
+                    
+                });
+            }
+        }
+
+    </script>
+</body>
+
+</html>

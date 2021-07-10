@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="detail">
+    </ul>
+    <button onclick="detail.update()">编辑</button>
+    <button onclick="detail.del()">删除</button>
+    <script src="./jquery.js"></script>
+    <script>
+        var search=location.search
+        var id=search.replace(/^\?_id=(.*)/,'$1')
+        var detail={
+            
+            getDetail:function(){
+                var self=this
+                $.ajax({
+                    type: "get",
+                    url: "http://localhost:8888/getDetail",
+                    data: {_id:id},
+                    dataType: "json",
+                    success: function (response) {
+                        self.renderDetail(response.data)
+                    },
+                    error: function(err){
+                        alert(err)
+                    }
+                });
+            },
+            renderDetail:function(data){
+                str=''
+                for(var key in data){
+                    if(key=='_id'|| key == '__v') continue
+                    str+=`<li>${key}:${data[key]||''}</li>`
+                }
+                $('#detail').html(str)
+            },
+            del:function(){
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8888/del",
+                    data: {_id:id},
+                    dataType: "json",
+                    success: function (response) {
+                        alert('删除成功')
+                        location.href='./index.html'
+                    },
+                    error: function(err){
+                        console.log(err)
+                    }
+                });
+            },
+            update(){
+                location.href=`./update.html?_id=${id}`
+            }
+        }
+        detail.getDetail()
+
+    </script>
+</body>
+</html>

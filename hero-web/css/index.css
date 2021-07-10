@@ -1,0 +1,42 @@
+#heroList {
+  list-style: none;
+}
+#heroList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  font-size: 18px;
+}
+#heroList li:nth-child(2n) {
+  background: #ebebeb;
+}
+#heroList li:nth-child(2n+1) {
+  background: #ddd;
+}
+#heroList li input {
+  width: 20px;
+  height: 20px;
+}
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  font-size: 20px;
+  background: #96b97d;
+  color: #fff;
+}
+.banner input {
+  width: 20px;
+  height: 20px;
+}
+.banner a {
+  color: #fff;
+}
+.banner #edit {
+  cursor: pointer;
+}
+body {
+  padding: 0 20%;
+}

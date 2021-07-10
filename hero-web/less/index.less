@@ -1,0 +1,44 @@
+#heroList{
+    list-style: none;
+    li{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        font-size: 18px;
+        &:nth-child(2n){
+            background: #ebebeb;
+        }
+        &:nth-child(2n+1){
+            background: #ddd;
+        }
+        input{
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.banner{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    font-size: 20px;
+    background: #96b97d;
+    color: #fff ;
+    input{
+        width: 20px;
+        height: 20px;
+    }
+    a{
+        color: #fff;
+    }
+    #edit{
+        cursor: pointer;
+    }
+}
+body{
+    padding: 0 20%;
+}

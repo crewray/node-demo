@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update</title>
+</head>
+
+<body>
+    <div>
+        <input id="name" type="text">
+        <input id="class" type="text">
+        <button onclick="updateHero.update()">确定</button>
+    </div>
+    <script src="./jquery.js"></script>
+    <script>
+        var search = location.search
+        var id = search.replace(/^\?_id=(.*)/, '$1')
+        var updateHero={
+            update() {$.ajax({
+                type: "post",
+                url: "http://localhost:8888/update",
+                data: {
+                    _id:id,
+                    name:$('#name').val(),
+                    class:$('#class').val()
+                },
+                dataType: "json",
+                success: function (response) {
+                    if(response.code==666){
+                        alert('更新成功')
+                        location.href=`./detail.html?_id=${id}`
+                    }
+                    else{
+                        alert(response.msg)
+                    }
+                },
+                error: function(){
+                    console.log(err)
+                }
+            });},
+            render(){
+                $.ajax({
+                    type: "get",
+                    url: "http://localhost:8888/getDetail",
+                    data: {_id:id},
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.code==666){
+                            $('#name').val(response.data.name)
+                            $('#class').val(response.data.class)
+                        }else{
+                            alert(response.msg)
+                        }
+                    },
+                    error:function(err){
+                        console.log(err)
+                    }
+                    
+                });
+            }
+        }
+        updateHero.render()
+    </script>
+</body>
+
+</html>
